@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+
+    {% load static %}
+
+    <!-- Bootstrap -->
+    <link href="{% static 'ReconocimientoFacial/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+
+    <!-- Fonts  
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet"> -->
+
+    <!-- Styles -->    
+    <link href="{% static 'ReconocimientoFacial/css/main.css' %}" rel="stylesheet">
+
+</head>
+<body>
+    <div class="main-body">
+        
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-md navbar-light" style="background-color: #084790;">
+            <a href="{% url 'home' %}" class="navbar-brand" style="padding-left: 2rem;">
+                <img src="{% static 'ReconocimientoFacial/img/logo-unimayor.png' %}" height="100" alt="Logo unimayor">
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ml-auto" style="margin-right: 6rem;">
+                    <a href="{% url 'all_students' %}" class="nav-item nav-link active item-menu">Estudiantes</a>
+                    <a href="{% url 'all_books' 0 %}" class="nav-item nav-link item-menu">Libros</a>
+                    <a href="{% url 'loan_history' %}" class="nav-item nav-link item-menu">Historial de Préstamos</a>
+                    <!--<a href="{% url 'deudas' %}" class="nav-item nav-link item-menu">Deudas</a>-->
+                </div>
+            </div>
+        </nav>
+
+        <!-- contenido dinamico -->
+        {% block content %} {% endblock %}
+
+        <!-- Footer -->
+        <footer class="footer mt-5">
+            <div class="row">
+                <p class="col-8 m-0" style="color: #ffffffab;">UNIMAYOR VIRTUAL &copy; 2020 Todos los derechos reservados</p>
+                <a href="{% url 'train_neural_network_for_recognition' %}" class="col-3 text-right" style="color: #4892e80f;">Entrenar la red neuronal</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'ReconocimientoFacial/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'ReconocimientoFacial/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'ReconocimientoFacial/js/main-page.js' %}"></script>
+
+</body>
+</html>

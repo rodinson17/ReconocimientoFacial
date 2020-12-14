@@ -1,0 +1,51 @@
+
+{% extends "ReconocimientoFacial/base.html" %}
+
+{% block title %} Inicio  {% endblock %}
+
+{% load static %}
+
+{% block content %}
+    <section class="page-section clearfix">
+        <div class="container">
+            {% if msg %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>¡Alerta!</strong> {{ msg }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+
+            {% if msg_success %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>¡Bien hecho!</strong> {{ msg_success }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+
+            <div class="row">
+                <div class="col" style="margin-top: 3.5rem;">
+                    <h3 style="color: #fff; font-weight: 300;">VIRTUAL</h3>
+                    <H1 class="mb-3" style="color: #fff; font-weight: 500;">Reconocimiento Facial</H1>
+                    <p class="mb-4" style="color: #fff; font-size: 1.2rem; text-align: justify; padding-right: 5rem; font-weight: 400;">
+                        Realice la detección, análisis y comparación de rostros
+                        en imágenes o videos, incluido el entrenamiento, la detección y el
+                        posicionamiento de rostros, el reconocimiento de
+                        atributos de rostros y la comparación de rostros para ingresar al sistema.
+                    </p>                    
+                    <a href="{% url 'capture_faces' %}" class="btn btn-lg btn-scan" tabindex="-1" role="button" aria-disabled="true">Escanear rostro</a>
+                    <a href="{% url 'register_student' %}" class="btn btn-lg btn-register" tabindex="-1" role="button" aria-disabled="true">Registrar estudiante</a>
+                </div>
+                <div class="col">
+                    <div style="text-align: center;"> 
+                        <img src="{% static 'ReconocimientoFacial/img/reconocimiento.gif' %}" alt="Img Face" width="420" height="430">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

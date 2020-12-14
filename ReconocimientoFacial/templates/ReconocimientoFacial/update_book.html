@@ -1,0 +1,91 @@
+{% extends "ReconocimientoFacial/base.html" %}
+
+{% block title %} Actualizar libro {% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="container register-form-student">
+        <h2 class="mb-5">Campos de actualización del libro</h2>
+
+        {% if msg_error %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>¡Alerta!</strong> {{ msg_error }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+            
+        <form id="dataUpdateBook" action="/actualizar-libro/{{ book.id }}" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            <div class="form-row">
+                <input id="id_book" name="student_id" type="hidden" value="{{ book.id }}">
+                <div class="col-md-6 mb-3 pr-4">
+                    <label for="validationCustom01">Nombre</label>
+                    <input type="text" class="form-control" name="name" id="validationCustom01" value="{{ book.name }}" required>
+                </div>
+                <div class="col-md-6 mb-3 pl-4">
+                    <label for="validationCustom02">Autor</label>
+                    <input type="text" class="form-control" name="author" id="validationCustom02" value="{{ book.author }}" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3 pr-4">
+                    <label for="validationCustom03">Categoría</label>
+                    <input type="text" class="form-control" name="category" id="validationCustom03" value="{{ book.category }}" required>
+                </div>
+                <div class="col-md-6 mb-3 pl-4">
+                    <label for="state">Estado</label>
+                    <select id="state" name="state" class="form-control">
+                        <option {% if book.state == "Bueno" %}selected{% endif %}>Bueno</option>
+                        <option {% if book.state == "Malo" %}selected{% endif %}>Malo</option>
+                        <option {% if book.state == "Regular" %}selected{% endif %}>Regular</option>
+                        <option {% if book.state == "Disponible" %}selected{% endif %}>Disponible</option>
+                        <option {% if book.state == "Usado" %}selected{% endif %}>Usado</option>
+                        <option {% if book.state == "Nuevo" %}selected{% endif %}>Nuevo</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3 pr-4">
+                    <label for="observations">Descripción</label>
+                    <textarea class="form-control" name="observations" id="observations" rows="3"></textarea>
+                    <input id="observations_value" name="student_id" type="hidden" value="{{ book.observations }}">                    
+                </div>
+                <div class="col-md-6 mb-3 pl-4">
+                    <label for="image">Carátula del libro</label>
+                    <input type="file" class="form-control-file" name="image" id="image">
+                </div>
+            </div>
+
+            <button id="sendUpdateBook" class="btn btn-primary mt-4" type="submit">Guardar</button>
+        </form>
+    </div>
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+
+{% endblock %}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Libros</title>
+
+        {% load static %}
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
+        <link href="{% static 'ReconocimientoFacial/css/bootstrap.min.css' %}" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="{% static 'ReconocimientoFacial/css/mdb.min.css' %}" rel="stylesheet">
+        <!-- Your custom styles (optional) -->
+        <link href="{% static 'ReconocimientoFacial/css/style.min.css' %}" rel="stylesheet">
+        <!-- MDBootstrap Datatables  -->
+        <link href="{% static 'ReconocimientoFacial/css/datatables.min.css' %}" rel="stylesheet">
+        <link href="{% static 'ReconocimientoFacial/css/main.css' %}" rel="stylesheet">
+  
+    </head>
+    <body>
+
+        <div class="main-body">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-md navbar-light" style="background-color: #084790; box-shadow: none;">
+                <a href="{% url 'home' %}" class="navbar-brand" style="padding-left: 2rem;">
+                    <img src="{% static 'ReconocimientoFacial/img/logo-unimayor.png' %}" height="100" alt="Logo unimayor">
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto" style="margin-right: 6rem;">
+                        <a href="{% url 'all_students' %}" class="nav-item nav-link active item-menu">Estudiantes</a>
+                        <a href="{% url 'all_books' 0 %}" class="nav-item nav-link item-menu">Libros</a>
+                        <a href="{% url 'loan_history' %}" class="nav-item nav-link item-menu">Historial de Préstamos</a>
+                        <!--<a href="{% url 'deudas' %}" class="nav-item nav-link item-menu">Deudas</a>-->
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container content-info-student mt-3">
+
+                {% if msg != '0' %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>¡Bien hecho!</strong> {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endif %}
+
+                <div class="row">
+                    <h1 class="col-10">Listado de Libros</h1>
+                    <div class="col-2 text-right">
+                        <a href="{% url 'add_book' %}" class="btn btn-primary btn-lg btn-add-book" role="button" aria-pressed="true">Añadir</a>
+                    </div>
+                </div>
+
+                <hr style="height: 1px; background-color: #bcbdbe66;">
+
+                {% if books %}
+                    <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                              <th class="th-sm font-weight-bold">Carátula</th>
+                              <th class="th-sm font-weight-bold">Nombre</th>
+                              <th class="th-sm font-weight-bold">Autor</th>
+                              <th class="th-sm font-weight-bold">Categoría</th>
+                              <th class="th-sm font-weight-bold">Estado</th>
+                              <th class="th-sm font-weight-bold">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                            {% for book in books %}
+                                <tr>
+                                    <td class="align-middle">
+                                        <img src="{{ book.image.url }}" class="rounded" alt="Cinque Terre" width="60" height="70" style="border: 1px solid #46454566;">
+                                    </td>
+                                    <td class="align-middle">{{ book.name }}</td>
+                                    <td class="align-middle">{{ book.author }}</td>
+                                    <td class="align-middle">{{ book.category }}</td>
+                                    <td class="align-middle">{{ book.state }}</td>
+                                    <td class="align-middle">
+                                        <a href="{% url 'update_book' book.id %}" type="button" class="btn btn-primary" style="padding: 7px 9px; margin: auto 4px;">
+                                            <svg width="1em" height="1em" style="width: 1rem;" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"></path>
+                                            </svg>
+                                        </a>  
+                                        <a href="{% url 'remove_book' book.id %}" type="button" class="btn btn-danger" style="padding: 7px 9px; margin: auto 4px;">
+                                            <svg width="1em" height="1em" style="width: 1rem;" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path>
+                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"></path>
+                                            </svg>
+                                        </a>                       
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>No se encontró ningún libro registrado.</p>
+                {% endif %}
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer mt-5">
+                <p class="m-0" style="color: #ffffffab;">UNIMAYOR VIRTUAL &copy; 2020 Todos los derechos reservados</p>
+            </footer>
+        </div>
+        
+
+        <!-- jQuery -->
+        <script type="text/javascript" src="{% static 'ReconocimientoFacial/js/jquery.min.js' %}"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="{% static 'ReconocimientoFacial/js/bootstrap.min.js' %}"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="{% static 'ReconocimientoFacial/js/mdb.min.js' %}"></script>
+
+        <!-- MDBootstrap Datatables  -->
+        <script type="text/javascript" src="{% static 'ReconocimientoFacial/js/datatables.min.js' %}"></script>
+	
+	    <script>
+		    $(document).ready(function () {
+			    $('#dtBasicExample').DataTable();
+			    $('.dataTables_length').addClass('bs-select');
+		    });
+	    </script>
+	
+    </body>
+</html>

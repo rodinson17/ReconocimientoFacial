@@ -1,0 +1,119 @@
+{% extends "ReconocimientoFacial/base.html" %}
+
+{% block title %} Registrar Estudiante  {% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="container register-form-student">
+        <h2 class="mb-5">Campos de registro para el estudiante</h2>
+
+        {% if msg_error %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>¡Alerta!</strong> {{ msg_error }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+            
+        <form action="/registrar-estudiante" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="col-md-6 mb-3 pr-4">
+                    <label for="validationCustom01">Nombre <span class="text-danger font-weight-bold">*</span></label>
+                    <input type="text" class="form-control" name="name" id="validationCustom01" value="" required>
+                </div>
+                <div class="col-md-6 mb-3 pl-4">
+                    <label for="validationCustom02">Apellido <span class="text-danger font-weight-bold">*</span></label>
+                    <input type="text" class="form-control" name="lastname" id="validationCustom02" value="" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3 pr-4">
+                    <label for="validationCustom03">Identificación <span class="text-danger font-weight-bold">*</span></label>
+                    <input type="text" class="form-control" name="identification" id="validationCustom03" value="" required>
+                </div>
+                <div class="col-md-6 mb-3 pl-4">
+                    <label for="validationCustom04">Correo Electrónico <span class="text-danger font-weight-bold">*</span></label>
+                    <input type="email" class="form-control" name="email" id="validationCustom04" value="" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3 pr-4">
+                    <label for="phone">Teléfono</label>
+                    <input type="text" class="form-control" name="phone" id="phone" value="">
+                </div>
+                <div class="col-md-6 mb-3 pl-4">
+                    <label for="image">Foto de Perfil</label>
+                    <input type="file" class="form-control-file" name="image" id="image">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3 pr-4">
+                    <label for="address">Dirección</label>
+                    <input type="text" class="form-control" name="address" id="address" value="">
+                </div>
+                <div class="col-md-6 mb-3 pl-4">
+                    <label for="birthdate">Fecha de Nacimiento</label>
+                    <input class="form-control" type="date" name="birthdate" value="2020-11-19" id="birthdate">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3 pr-4">
+                    <label for="gender">Género</label>
+                    <select id="gender" name="gender" class="form-control">
+                        <option>Masculino</option>
+                        <option>Femenino</option>
+                        <option>Sin definir</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3 pl-4">
+                    <label for="validationCustom05">Nombre del programa que está cursando <span class="text-danger font-weight-bold">*</span></label>
+                    <input type="text" class="form-control" name="program" id="validationCustom05" value="" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3 pr-4">
+                    <label for="validationCustom06">Semestre que está cursando <span class="text-danger font-weight-bold">*</span></label>
+                    <input type="text" class="form-control" name="semester" id="validationCustom06" value="" required>
+                </div>
+            </div>
+
+            <div class="alert alert-primary" role="alert">
+                Ten en cuenta que al finalizar el registro, va a salir la cámara con el fin de tomar algunas capturas
+                de tu rostro, la finalidad es poder realizar el reconocimiento facial cuando ingreses nuevamente a la plataforma.
+            </div>
+
+            <button class="btn btn-primary" type="submit">Guardar</button>
+        </form>
+    </div>
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+{% endblock %}

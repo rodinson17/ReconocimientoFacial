@@ -1,0 +1,31 @@
+{% if loan_historys %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="th-sm font-weight-bold">Nombre Libro</th>
+                <th class="th-sm font-weight-bold">Fecha Préstamo</th>
+                <th class="th-sm font-weight-bold">Fecha Devolución</th>
+                <th class="th-sm font-weight-bold">Estado</th>
+                <th class="th-sm font-weight-bold">Observaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for loan in loan_historys %}
+                <tr>                    
+                    {% for book in loan.books.all %}
+                        <td class="align-middle">{{ book.name }}</td>
+                    {% endfor %}
+                    <td class="align-middle">{{ loan.created }}</td>
+                    <td class="align-middle">{{ loan.return_date }}</td>
+                    <td class="align-middle">
+                        <span class="state-book {% if loan.state == 'Entregado' %}state-delivered{% endif %}{% if loan.state == 'Prestado' %}state-borrowed{% endif %}{% if loan.state == 'Reservado' %}state-reserved{% endif %}{% if loan.state == 'No Disponible' %}state-not-available{% endif %}">{{ loan.state }}</span>
+                    </td>                    
+                    <td class="align-middle">{{ loan.observations }}</td>  
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No se encontro ningún registro de préstamos.</p>
+{% endif %}
+

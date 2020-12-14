@@ -1,0 +1,46 @@
+{% extends "ReconocimientoFacial/base.html" %}
+
+{% block title %} Estudiantes  {% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="container content-info-student">
+        <h1>Listado de Estudiantes</h1>
+
+        {% if students %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Foto</th>
+                        <th scope="col">Identificación</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Correo Electrónico</th>
+                        <th scope="col">Teléfono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                        <tr>
+                            <td>
+                                <img src="{{ student.image.url }}" class="rounded-circle" alt="Cinque Terre" width="60" height="50" style="border: 1px solid #46454566;">
+                            </td>
+                            <td>{{ student.identification }}</td>
+                            <td>{{ student.name }} {{ student.lastname }}</td>
+                            <td>{{ student.email }}</td>
+                            <td>{{ student.phone }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No se encontro ningún estudiante registrado.</p>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+
+
+

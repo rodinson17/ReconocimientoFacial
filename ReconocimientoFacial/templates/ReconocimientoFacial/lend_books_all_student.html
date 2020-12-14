@@ -1,0 +1,91 @@
+{% extends "ReconocimientoFacial/base.html" %}
+
+{% block title %} Préstamo libros {% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="container content-info-student">
+        <h2 class="mb-5">Campos de registro para el préstamo</h2>
+
+        {% if msg_error %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>¡Alerta!</strong> {{ msg_error }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+
+        <form action="/prestar-libros/-1" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="col-md-6 mb-3 pr-4">
+                    <label for="validationCustom01">Estudiante <span class="text-danger font-weight-bold">*</span></label>
+                    <select id="state" name="student_id" class="form-control">
+                        {% for student in students %}
+                            <option value="{{ student.id }}">{{ student.name }} {{ student.lastname }}</option>
+                        {% endfor %}
+                    </select>
+                </div>                
+                <div class="col-md-6 mb-3 pl-4">
+                    <label for="state">Nombre del Libro <span class="text-danger font-weight-bold">*</span></label>
+                    <select id="state" name="book_id" class="form-control">
+                        {% for book in books %}
+                            <option value="{{ book.id }}">{{ book.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3 pr-4">
+                    <label for="validationCustom03">Fecha de Entrega</label>
+                    <input class="form-control" type="datetime-local" id="return_date" name="return_date">
+                </div>
+                <div class="col-md-6 mb-3 pl-4">
+                    <label for="state">Estado <span class="text-danger font-weight-bold">*</span></label>
+                    <select id="state" name="state" class="form-control">
+                        <option>Entregado</option>
+                        <option>Prestado</option>
+                        <option>Reservado</option>
+                        <option>No Disponible</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3 pr-4">
+                    <label for="observations">Observación</label>
+                    <textarea class="form-control" name="observations" id="observations" rows="3"></textarea>
+                </div>                
+            </div>
+
+            <button class="btn btn-primary mt-4" type="submit">Guardar</button>
+        </form>
+    </div>
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+
+{% endblock %}

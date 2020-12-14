@@ -1,0 +1,190 @@
+{% extends "ReconocimientoFacial/base.html" %}
+
+{% block title %} Información Estudiante  {% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="container-fluid content-info-student">
+        <div class="row mb-5">
+            <h1 class="col-2">Estudiante</h1>
+            <hr class="col-9 line-spacing">
+        </div>
+
+        <div class="row" style="box-shadow: 1px 1px 10px 8px #4444444d;">
+            <div class="col-4 text-center" style="padding: 1rem; border-right: 2px solid #cfcfcf;">
+                <img src="{{ student.image.url }}" class="rounded-circle" alt="Cinque Terre" width="280" height="250" style="border: 1px solid #46454566;">
+                <h5 class="mt-3">{{ student.name }} {{ student.lastname }}</h5>
+                <h5 class="mt-3">{{ student.program }}</h5>
+            </div>
+
+            <div class="col-8">
+                <div style="padding: 2rem 0; border-bottom: 2px solid #cbcbcb; height: 50%;">
+                    <h6 class="mb-4">Información Personal del Estudiante</h6>
+                    <div class="row">
+                        <div class="col">
+                            <p>Nombres: <strong>{{ student.name }}</strong></p>
+                            <p>Teléfono: <strong>{{ student.phone }}</strong></p>
+                        </div>
+                        <div class="col">
+                            <p>Apellidos: <strong>{{ student.lastname }}</strong></p>
+                            <p>Dirección: <strong>{{ student.address }}</strong></p>
+                        </div>
+                        <div class="col">
+                            <p>Nacimiento: <strong>{{ student.birthdate }}</strong></p>
+                            <p>Género: <strong>{{ student.gender }}</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="padding: 2rem 0; height: 50%;">
+                    <h6 class="mb-4">Información Académica del Estudiante</h6>
+                    <div class="row">
+                        <div class="col">
+                            <p>Programa: <strong>{{ student.program }}</strong></p>
+                            <p>Número de libros alquilados: <strong>{{ numBooks }}</strong></p>
+                        </div>
+                        <div class="col">
+                            <p>Semestre: <strong>{{ student.semester }}</strong></p>
+                            <!-- <p>Último resgistro: <strong>11/04/2019</strong></p> -->
+                        </div>
+                        <div class="col">
+                            <p>Fecha de registro: <strong>{{ student.created }}</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-5">
+            <h1 class="col-5">Historial de préstamos</h1>
+            <hr class="col-4 line-spacing">  
+            <button type="button" class="btn btn-primary btn-lg active" data-toggle="modal" data-target="#modalNewLoan">
+                Nuevo Préstamo
+            </button>            
+        </div>
+        
+        <div id="infoLoan">
+            {% if loan_historys %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="th-sm font-weight-bold">Nombre Libro</th>
+                            <th class="th-sm font-weight-bold">Fecha Préstamo</th>
+                            <th class="th-sm font-weight-bold">Fecha Devolución</th>
+                            <th class="th-sm font-weight-bold">Estado</th>
+                            <th class="th-sm font-weight-bold">Observaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for loan in loan_historys %}
+                            <tr>                    
+                                {% for book in loan.books.all %}
+                                    <td class="align-middle">{{ book.name }}</td>
+                                {% endfor %}
+                                <td class="align-middle">{{ loan.created }}</td>
+                                <td class="align-middle">{{ loan.return_date }}</td>
+                                <td class="align-middle" style="width: 9rem;">
+                                    <span class="state-book {% if loan.state == 'Entregado' %}state-delivered{% endif %}{% if loan.state == 'Prestado' %}state-borrowed{% endif %}{% if loan.state == 'Reservado' %}state-reserved{% endif %}{% if loan.state == 'No Disponible' %}state-not-available{% endif %}">{{ loan.state }}</span>
+                                </td>                    
+                                <td class="align-middle">{{ loan.observations }}</td>  
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <h5 class="mb-4">Datos de prueba</h5>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre Libro</th>
+                            <th scope="col">Fecha Préstamo</th>
+                            <th scope="col">Fecha Devolución</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Observaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Machine Learning Vol 2</td>
+                            <td>04/01/2020, 2:00 pm</td>
+                            <td>07/01/2020, 8:00 pm</td>
+                            <td><span class="state-span">Entregado</span></td>
+                            <td>Entregado a tiempo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalNewLoan" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg">
+            <div class="modal-content">
+                <form id="sendLoan" action="/guardar-prestamo" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
+            
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Campos de registro para el préstamo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        
+                            {% csrf_token %}
+
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3 pr-4">
+                                    <label for="validationCustom01">Estudiante</label>
+                                    <input type="text" class="form-control" name="name_student" id="validationCustom01" value="{{ student.name }} {{ student.lastname }}" disabled>
+                                    <input name="student_id" type="hidden" value="{{ student.id }}">
+                                </div>                
+                                <div class="col-md-6 mb-3 pl-4">
+                                    <label for="book">Nombre del Libro</label>
+                                    <select id="book" name="book_id" class="form-control">
+                                        {% for book in books %}
+                                            <option value="{{ book.id }}">{{ book.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3 pr-4">
+                                    <label for="validationCustom03">Fecha de Entrega</label>
+                                    <input class="form-control" type="datetime-local" id="return_date" name="return_date">
+                                </div>
+                                <div class="col-md-6 mb-3 pl-4">
+                                    <label for="state">Estado</label>
+                                    <select id="state" name="state" class="form-control">
+                                        <option>Entregado</option>
+                                        <option>Prestado</option>
+                                        <option>Reservado</option>
+                                        <option>No Disponible</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3 pr-4">
+                                    <label for="observations">Observación</label>
+                                    <textarea class="form-control" name="observations" id="observations" rows="3"></textarea>
+                                </div>                
+                            </div>
+
+                            <!-- <button class="btn btn-primary mt-4" type="submit">Guardar</button> -->
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button id="saveLoan" type="button" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
