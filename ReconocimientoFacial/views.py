@@ -225,7 +225,7 @@ def capture_faces_video(name_person, identification):
     #video_capture = cv2.VideoCapture('C:/Users/rodin/Documents/project-django/Reconocimiento/ReconocimientoFacial/videosPrueba/didier.mp4')
     #video_capture = cv2.VideoCapture('C:/Users/rodin/Documents/project-django/Reconocimiento/ReconocimientoFacial/videosPrueba/mauricio.mp4')
 
-    video_capture = cv2.VideoCapture('C:/Users/rodin/Documents/project-django/Reconocimiento/ReconocimientoFacial/videosPrueba/mauricio.mp4')
+    video_capture = cv2.VideoCapture('C:/Users/rodin/Documents/project-django/Reconocimiento/ReconocimientoFacial/videosPrueba/47-cornelio-vinicio-toledo.mp4')
 
     # Se emplea el metodo haarcascade para identificar el rostro.
     face_classif = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
@@ -307,6 +307,7 @@ def train_neural_network():
 def facial_recognition():
     data_path = 'C:/Users/rodin/Documents/project-django/Reconocimiento/ReconocimientoFacial/data'
     image_paths = os.listdir(data_path)
+    #method = 'EigenFaces'
     method = 'LBPH'
 
     if method == 'EigenFaces': face_recognizer = cv2.face.EigenFaceRecognizer_create()
@@ -322,9 +323,11 @@ def facial_recognition():
     #video_capture = cv2.VideoCapture('C:/Users/rodin/Documents/project-django/Reconocimiento/ReconocimientoFacial/videosPrueba/didier.mp4')
     #video_capture = cv2.VideoCapture('C:/Users/rodin/Documents/project-django/Reconocimiento/ReconocimientoFacial/videosPrueba/mauricio.mp4')
 
-    #video_capture = cv2.VideoCapture('C:/Users/rodin/Documents/project-django/Reconocimiento/ReconocimientoFacial/videosPrueba/3-maria-isabel-aguilar.PNG')
-    #video_capture = cv2.VideoCapture('C:/Users/rodin/Documents/project-django/Reconocimiento/ReconocimientoFacial/videosPrueba/data/1-angelica-viviana-albarracin.mp4')
+    # Desconocido
     video_capture = cv2.VideoCapture('C:/Users/rodin/Documents/project-django/Reconocimiento/ReconocimientoFacial/videosPrueba/50-ernesto-antonio-torres.mp4')
+    #video_capture = cv2.VideoCapture('C:/Users/rodin/Documents/project-django/Reconocimiento/ReconocimientoFacial/videosPrueba/3-maria-isabel-aguilar.PNG')
+
+    #video_capture = cv2.VideoCapture('C:/Users/rodin/Documents/project-django/Reconocimiento/ReconocimientoFacial/videosPrueba/47-cornelio-vinicio-toledo.mp4')
 
     face_classif = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
     recognition = False
