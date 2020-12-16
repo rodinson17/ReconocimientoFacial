@@ -21,51 +21,51 @@
         <form action="/registrar-estudiante" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
             <div class="form-row">
-                <div class="col-md-6 mb-3 pr-4">
+                <div class="col-sm-12 col-md-6 mb-3 field-pr">
                     <label for="validationCustom01">Nombre <span class="text-danger font-weight-bold">*</span></label>
                     <input type="text" class="form-control" name="name" id="validationCustom01" value="" required>
                 </div>
-                <div class="col-md-6 mb-3 pl-4">
+                <div class="col-sm-12 col-md-6 mb-3 field-pl">
                     <label for="validationCustom02">Apellido <span class="text-danger font-weight-bold">*</span></label>
                     <input type="text" class="form-control" name="lastname" id="validationCustom02" value="" required>
                 </div>
             </div>
 
             <div class="form-row">
-                <div class="col-md-6 mb-3 pr-4">
+                <div class="col-sm-12 col-md-6 mb-3 field-pr">
                     <label for="validationCustom03">Identificación <span class="text-danger font-weight-bold">*</span></label>
                     <input type="text" class="form-control" name="identification" id="validationCustom03" value="" required>
                 </div>
-                <div class="col-md-6 mb-3 pl-4">
+                <div class="col-sm-12 col-md-6 mb-3 field-pl">
                     <label for="validationCustom04">Correo Electrónico <span class="text-danger font-weight-bold">*</span></label>
                     <input type="email" class="form-control" name="email" id="validationCustom04" value="" required>
                 </div>
             </div>
 
             <div class="form-row">
-                <div class="col-md-6 mb-3 pr-4">
+                <div class="col-sm-12 col-md-6 mb-3 field-pr">
                     <label for="phone">Teléfono</label>
                     <input type="text" class="form-control" name="phone" id="phone" value="">
                 </div>
-                <div class="col-md-6 mb-3 pl-4">
+                <div class="col-sm-12 col-md-6 mb-3 field-pl">
                     <label for="image">Foto de Perfil</label>
                     <input type="file" class="form-control-file" name="image" id="image">
                 </div>
             </div>
 
             <div class="form-row">
-                <div class="col-md-6 mb-3 pr-4">
+                <div class="col-sm-12 col-md-6 mb-3 field-pr">
                     <label for="address">Dirección</label>
                     <input type="text" class="form-control" name="address" id="address" value="">
                 </div>
-                <div class="col-md-6 mb-3 pl-4">
+                <div class="col-sm-12 col-md-6 mb-3 field-pl">
                     <label for="birthdate">Fecha de Nacimiento</label>
                     <input class="form-control" type="date" name="birthdate" value="2020-11-19" id="birthdate">
                 </div>
             </div>
 
             <div class="form-row">
-                <div class="col-md-6 mb-3 pr-4">
+                <div class="col-sm-12 col-md-6 mb-3 field-pr">
                     <label for="gender">Género</label>
                     <select id="gender" name="gender" class="form-control">
                         <option>Masculino</option>
@@ -73,14 +73,14 @@
                         <option>Sin definir</option>
                     </select>
                 </div>
-                <div class="col-md-6 mb-3 pl-4">
+                <div class="col-sm-12 col-md-6 mb-3 field-pl">
                     <label for="validationCustom05">Nombre del programa que está cursando <span class="text-danger font-weight-bold">*</span></label>
                     <input type="text" class="form-control" name="program" id="validationCustom05" value="" required>
                 </div>
             </div>
 
             <div class="form-row">
-                <div class="col-md-6 mb-3 pr-4">
+                <div class="col-sm-12 col-md-6 mb-3 field-pr">
                     <label for="validationCustom06">Semestre que está cursando <span class="text-danger font-weight-bold">*</span></label>
                     <input type="text" class="form-control" name="semester" id="validationCustom06" value="" required>
                 </div>

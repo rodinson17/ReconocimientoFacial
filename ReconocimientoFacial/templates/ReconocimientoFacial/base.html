@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>{% block title %} {% endblock %}</title>
 
     {% load static %}
@@ -27,11 +29,12 @@
         
         <!-- Navbar -->
         <nav class="navbar navbar-expand-md navbar-light" style="background-color: #084790;">
-            <a href="{% url 'home' %}" class="navbar-brand" style="padding-left: 2rem;">
-                <img src="{% static 'ReconocimientoFacial/img/logo-unimayor.png' %}" height="100" alt="Logo unimayor">
+            <a href="{% url 'home' %}" class="navbar-brand content-logo" style="padding-left: 2rem;">
+                <img class="image-logo" src="{% static 'ReconocimientoFacial/img/logo-unimayor.png' %}" height="100" alt="Logo unimayor">
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
+                <i class="fas fa-bars icon-nav-bars"></i>
+                <!-- <span class="navbar-toggler-icon"></span> -->
             </button>
 
             <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -50,8 +53,8 @@
         <!-- Footer -->
         <footer class="footer mt-5">
             <div class="row">
-                <p class="col-8 m-0" style="color: #ffffffab;">UNIMAYOR VIRTUAL &copy; 2020 Todos los derechos reservados</p>
-                <a href="{% url 'train_neural_network_for_recognition' %}" class="col-3 text-right" style="color: #4892e80f;">Entrenar la red neuronal</a>
+                <p class="col-sm-12 col-md-8 m-0" style="color: #ffffffab;">UNIMAYOR VIRTUAL &copy; 2020 Todos los derechos reservados</p>
+                <a href="{% url 'train_neural_network_for_recognition' %}" class="col-sm-12 col-md-3 text-right" style="color: #4892e80f;">Entrenar la red neuronal</a>
             </div>
         </footer>
     </div>

@@ -25,11 +25,12 @@
         <div class="main-body">
             <!-- Navbar -->
             <nav class="navbar navbar-expand-md navbar-light" style="background-color: #084790; box-shadow: none;">
-                <a href="{% url 'home' %}" class="navbar-brand" style="padding-left: 2rem;">
-                    <img src="{% static 'ReconocimientoFacial/img/logo-unimayor.png' %}" height="100" alt="Logo unimayor">
+                <a href="{% url 'home' %}" class="navbar-brand content-logo" style="padding-left: 2rem;">
+                    <img class="image-logo" src="{% static 'ReconocimientoFacial/img/logo-unimayor.png' %}" height="100" alt="Logo unimayor">
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
+                    <!-- <span class="navbar-toggler-icon"></span> -->
+                    <i class="fas fa-bars icon-nav-bars"></i>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -44,8 +45,8 @@
 
             <div class="container content-info-student mt-3">
                 <div class="row">
-                    <h1 class="col-9 mb-4">Listado de Estudiantes</h1>
-                    <div class="col-3 text-right">
+                    <h1 class="col-sm-12 col-md-9 mb-4">Listado de Estudiantes</h1>
+                    <div class="col-sm-12 col-md-3 text-right">
                         <a href="{% url 'register_student' %}" class="btn btn-primary btn-lg btn-add-book" role="button" aria-pressed="true">Nuevo estudiante</a>
                     </div>
                 </div>
@@ -53,7 +54,7 @@
                 <hr style="height: 1px; background-color: #bcbdbe66;">
 
                 {% if students %}
-                    <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                    <table id="dtBasicExample" class="table table-responsive table-striped table-bordered table-sm" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                               <th class="th-sm font-weight-bold">Foto</th>

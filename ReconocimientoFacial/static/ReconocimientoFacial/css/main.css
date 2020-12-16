@@ -95,3 +95,101 @@
     color: #721c24;
     border: 1px solid #721c247a;
 }
+
+.image-logo {
+    height: 100px;
+}
+
+.navbar-light .navbar-toggler {
+    border-color: transparent;
+}
+
+.field-pr {
+    padding-right: 1.5rem !important;
+}
+.field-pl {
+    padding-left: 1.5rem !important;
+}
+
+.icon-nav-bars {
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+
+
+@media (max-width: 576px) { 
+
+    .content-logo {
+        padding-left: 0 !important;
+    }
+
+    .image-logo {
+        height: 55px;
+    }
+
+    .navbar {
+        padding: 0 !important;
+    }
+
+    .navbar.navbar-light .navbar-toggler-icon {        
+        background-color: #ffffff8c;
+    }
+
+    .navbar-collapse {        
+        margin-top: 1rem;
+    }
+
+    button.navbar-toggler:focus {
+        outline: none !important;
+    }
+
+    #content-description-recognition {
+        text-align: center;
+        order: 2;
+        margin-bottom: 3rem;
+    }
+
+    #content-description-recognition p {
+        padding-right: 0 !important;
+    }
+
+    #btn-scan-face {
+        margin-top: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    #btn-register-student {
+        margin-left: 0;
+    }
+
+    #content-image-recognition {
+        margin-top: 2rem;
+        order: 1;
+    }
+
+    #image-recognition {
+        width: 300px;
+        height: auto;
+    }
+
+
+    .field-pr {
+        padding-right: 0 !important;
+    }
+    .field-pl {
+        padding-left: 0 !important;
+    }
+
+    .register-form-student {
+        padding: 3rem 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .content-info-student {
+        padding: 3rem 1.5rem;
+        margin-top: 1.5rem;
+    }
+    
+}

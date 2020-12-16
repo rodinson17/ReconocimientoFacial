@@ -22,22 +22,22 @@
             {% csrf_token %}
             <div class="form-row">
                 <input id="id_book" name="student_id" type="hidden" value="{{ book.id }}">
-                <div class="col-md-6 mb-3 pr-4">
+                <div class="col-sm-12 col-md-6 mb-3 field-pr">
                     <label for="validationCustom01">Nombre</label>
                     <input type="text" class="form-control" name="name" id="validationCustom01" value="{{ book.name }}" required>
                 </div>
-                <div class="col-md-6 mb-3 pl-4">
+                <div class="col-sm-12 col-md-6 mb-3 field-pl">
                     <label for="validationCustom02">Autor</label>
                     <input type="text" class="form-control" name="author" id="validationCustom02" value="{{ book.author }}" required>
                 </div>
             </div>
 
             <div class="form-row">
-                <div class="col-md-6 mb-3 pr-4">
+                <div class="col-sm-12 col-md-6 mb-3 field-pr">
                     <label for="validationCustom03">Categoría</label>
                     <input type="text" class="form-control" name="category" id="validationCustom03" value="{{ book.category }}" required>
                 </div>
-                <div class="col-md-6 mb-3 pl-4">
+                <div class="col-sm-12 col-md-6 mb-3 field-pl">
                     <label for="state">Estado</label>
                     <select id="state" name="state" class="form-control">
                         <option {% if book.state == "Bueno" %}selected{% endif %}>Bueno</option>
@@ -51,12 +51,12 @@
             </div>
 
             <div class="form-row">
-                <div class="col-md-6 mb-3 pr-4">
+                <div class="col-sm-12 col-md-6 mb-3 field-pr">
                     <label for="observations">Descripción</label>
                     <textarea class="form-control" name="observations" id="observations" rows="3"></textarea>
                     <input id="observations_value" name="student_id" type="hidden" value="{{ book.observations }}">                    
                 </div>
-                <div class="col-md-6 mb-3 pl-4">
+                <div class="col-sm-12 col-md-6 mb-3 field-pl">
                     <label for="image">Carátula del libro</label>
                     <input type="file" class="form-control-file" name="image" id="image">
                 </div>
