@@ -145,6 +145,10 @@
         outline: none !important;
     }
 
+    .nav-margin-movil {
+        margin-right: 0 !important;
+    }
+
     #content-description-recognition {
         text-align: center;
         order: 2;

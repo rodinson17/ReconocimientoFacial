@@ -34,7 +34,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ml-auto" style="margin-right: 6rem;">
+                    <div class="navbar-nav ml-auto nav-margin-movil" style="margin-right: 6rem;">
                         <a href="{% url 'all_students' %}" class="nav-item nav-link active item-menu">Estudiantes</a>
                         <a href="{% url 'all_books' 0 %}" class="nav-item nav-link item-menu">Libros</a>
                         <a href="{% url 'loan_history' %}" class="nav-item nav-link item-menu">Historial de Préstamos</a>
@@ -73,7 +73,7 @@
                                     {% for book in loan.books.all %}
                                         <td class="align-middle">{{ book.name }}</td>
                                     {% endfor %}
-                                    <td class="align-middle" style="width: 8rem;">
+                                    <td class="align-middle" style="width: 14%;"><!-- 8rem; -->
                                         <span class="state-book {% if loan.state == 'Entregado' %}state-delivered{% endif %}{% if loan.state == 'Prestado' %}state-borrowed{% endif %}{% if loan.state == 'Reservado' %}state-reserved{% endif %}{% if loan.state == 'No Disponible' %}state-not-available{% endif %}">{{ loan.state }}</span>
                                     </td>
                                     <td class="align-middle">{{ loan.created }}</td>
