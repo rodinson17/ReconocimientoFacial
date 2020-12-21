@@ -196,4 +196,8 @@
         margin-top: 1.5rem;
     }
     
+    .table-responsive-student {
+        display: block;
+        overflow-x: auto;
+    }
 }
